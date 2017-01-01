@@ -9,13 +9,13 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Name"
-        android:id="@+id/Name"
+        android:id="@+id/Namesecond"
         android:layout_gravity="center_horizontal" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextName"
+        android:id="@+id/editTextNamesecond"
         android:layout_gravity="center_horizontal" />
 
     <TextView
@@ -23,13 +23,13 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Address"
-        android:id="@+id/address"
+        android:id="@+id/addresssecond"
         android:layout_gravity="center_horizontal" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextAddress"
+        android:id="@+id/editTextAddresssecond"
         android:layout_gravity="center_horizontal" />
 
     <TextView
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Mobile"
-        android:id="@+id/mobile"
+        android:id="@+id/mobilesecond"
         android:layout_gravity="center_horizontal" />
 
     <EditText
@@ -45,20 +45,20 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:maxLength="20"
-        android:id="@+id/editTextMobile"
+        android:id="@+id/editTextMobilesecond"
         android:layout_gravity="center_horizontal" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
-        android:id="@+id/save"
+        android:id="@+id/savesecond"
         android:layout_gravity="center_horizontal" />
 
     <Button
         android:text="Close"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/close"
+        android:id="@+id/closesecond"
         android:layout_gravity="center_horizontal" />
 </LinearLayout>
