@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    textViewShow
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,7 +12,7 @@
         android:layout_weight="3"
         android:layout_marginBottom="10dp"
         android:text=""
-        android:id="@+id/firstinfotextshow" />
+        android:id="@+id/secondinfoshowtext" />
 
     <Button
         android:layout_width="146dp"
@@ -20,7 +20,7 @@
         android:layout_marginBottom="10dp"
         android:text="close"
         android:layout_weight="0.20"
-        android:id="@+id/closfirstinfo"
+        android:id="@+id/closesecondinfo"
         android:layout_gravity="center" />
 
 </LinearLayout>

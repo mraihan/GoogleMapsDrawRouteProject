@@ -12,15 +12,16 @@ import android.widget.TextView;
  */
 public class Show extends Activity{
 
-    TextView textViewShow;
+    TextView firstinfotextshow;
+    Button closfirstinfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.show);
 
-        textViewShow = (TextView) findViewById(R.id.textViewShow);
-
+        firstinfotextshow = (TextView) findViewById(R.id.firstinfotextshow);
+        closfirstinfo = (Button) findViewById(R.id.closfirstinfo);
         Intent intent = getIntent();
 
         String name = intent.getStringExtra("name");
@@ -28,7 +29,19 @@ public class Show extends Activity{
         String mob = intent.getStringExtra("mob");
 
 
-        textViewShow.setText("Name: "+name+"\nAddress: "+addr+"\nMobile: "+mob);
+        firstinfotextshow.setText("Name: "+name+"\nAddress: "+addr+"\nMobile: "+mob);
+
+        closfirstinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finish();
+
+
+
+            }
+        });
+
 
     }
 }

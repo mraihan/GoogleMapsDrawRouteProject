@@ -7,6 +7,7 @@ import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Created by Raihan on 24-Dec-16.
@@ -23,6 +24,7 @@ public class Information extends Activity {
 
 
         save = (Button) findViewById(R.id.save);
+        close  = (Button) findViewById(R.id.close);
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextAddress = (EditText) findViewById(R.id.editTextAddress);
         editTextMobile = (EditText) findViewById(R.id.editTextMobile);
@@ -37,7 +39,7 @@ public class Information extends Activity {
                 in.putExtra("name", editTextName.getText().toString());
                 in.putExtra("addr", editTextAddress.getText().toString());
                 in.putExtra("mob", editTextMobile.getText().toString());
-
+                Toast.makeText(getApplicationContext(), "Saved !!", Toast.LENGTH_LONG).show();
                 startActivity(in);
 
 
@@ -48,8 +50,7 @@ public class Information extends Activity {
             @Override
             public void onClick(View v) {
 
-                Information.this.finish();
-                //ActivityCompat.finishAffinity(Information.this);
+               finish();
 
 
 

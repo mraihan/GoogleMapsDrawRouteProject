@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * Created by Rian on 01-Jan-17.
@@ -13,7 +14,7 @@ import android.widget.EditText;
 
 public class SecondInformation extends Activity {
 
-    Button savesecond,close;
+    Button savesecond,closesecond;
     EditText editTextNamesecond,editTextAddresssecond,editTextMobilesecond;
 
     @Override
@@ -23,6 +24,7 @@ public class SecondInformation extends Activity {
 
 
         savesecond = (Button) findViewById(R.id.savesecond);
+        closesecond = (Button) findViewById(R.id.savesecond);
         editTextNamesecond = (EditText) findViewById(R.id.editTextNamesecond);
         editTextAddresssecond = (EditText) findViewById(R.id.editTextAddresssecond);
         editTextMobilesecond = (EditText) findViewById(R.id.editTextMobilesecond);
@@ -32,24 +34,23 @@ public class SecondInformation extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent in = new Intent(SecondInformation.this,LineInfoShow.class);
+                Intent in = new Intent(SecondInformation.this,SecondInformationShow.class);
 
-                in.putExtra("linename", editTextNamesecond.getText().toString());
-                in.putExtra("lineaddr", editTextAddresssecond.getText().toString());
-                in.putExtra("linemob", editTextMobilesecond.getText().toString());
-
+                in.putExtra("sname", editTextNamesecond.getText().toString());
+                in.putExtra("saddr", editTextAddresssecond.getText().toString());
+                in.putExtra("smob", editTextMobilesecond.getText().toString());
+                Toast.makeText(getApplicationContext(), "Saved !!", Toast.LENGTH_LONG).show();
                 startActivity(in);
 
 
             }
         });
 
-        close.setOnClickListener(new View.OnClickListener() {
+        closesecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                SecondInformation.this.finish();
-                //ActivityCompat.finishAffinity(Information.this);
+               finish();
 
 
 

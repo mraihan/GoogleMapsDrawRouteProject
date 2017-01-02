@@ -36,9 +36,7 @@ public class LineInfoShow extends Activity{
             @Override
             public void onClick(View v) {
 
-                LineInfoShow.this.finish();
-                //ActivityCompat.finishAffinity(Information.this);
-
+                finish();
 
 
 

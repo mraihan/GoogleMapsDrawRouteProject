@@ -27,9 +27,24 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+
+import com.google.maps.android.kml.KmlContainer;
+import com.google.maps.android.kml.KmlLayer;
+import com.google.maps.android.kml.KmlPlacemark;
+import com.google.maps.android.kml.KmlPolygon;
+
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+
 
 import org.json.JSONObject;
 
@@ -62,19 +77,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-
         linesinfobtn = (Button) findViewById(R.id.linesinfobtn);
 
         linesinfobtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent in = new Intent(MapsActivity.this,LineInfoShow.class);
+                Intent in = new Intent(MapsActivity.this,LineInfo.class);
+                startActivity(in);
 
 
 
             }
         });
+
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -89,6 +105,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
+
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -98,6 +116,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -149,7 +168,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     startActivity(in);
                 } else if (MarkerPoints.size() == 2) {
                     options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                    Intent in = new Intent(MapsActivity.this,Information.class);
+                    Intent in = new Intent(MapsActivity.this,SecondInformation.class);
                     startActivity(in);
                 }
 
@@ -170,10 +189,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     // Start downloading json data from Google Directions API
                     FetchUrl.execute(url);
                     //move map camera
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(origin));
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+//                    mMap.moveCamera(CameraUpdateFactory.newLatLng(origin));
+//                    mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 
-                    Intent in = new Intent(MapsActivity.this,Information.class);
+                    Intent in = new Intent(MapsActivity.this,SecondInformation.class);
                     startActivity(in);
                 }
 
@@ -181,6 +200,93 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
     }
+//    @Override
+//    public void onMapReady(GoogleMap googleMap) {
+//        mMap = googleMap;
+//        retrieveFileFromUrl();
+//        googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+//
+//        //Initialize Google Play Services
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            if (ContextCompat.checkSelfPermission(this,
+//                    Manifest.permission.ACCESS_FINE_LOCATION)
+//                    == PackageManager.PERMISSION_GRANTED) {
+//                buildGoogleApiClient();
+//
+//                mMap.setMyLocationEnabled(true);
+//            }
+//        }
+//        else {
+//            buildGoogleApiClient();
+//            mMap.setMyLocationEnabled(true);
+//        }
+//
+//        // Setting onclick event listener for the map
+//        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+//
+//            @Override
+//            public void onMapClick(LatLng point) {
+//
+//                // Already two locations
+//                if (MarkerPoints.size() > 1) {
+//                    MarkerPoints.clear();
+//                    mMap.clear();
+//                }
+//
+//                // Adding new item to the ArrayList
+//                MarkerPoints.add(point);
+//
+//                // Creating MarkerOptions
+//                MarkerOptions options = new MarkerOptions();
+//
+//                // Setting the position of the marker
+//                options.position(point);
+//
+//                /**
+//                 * For the start location, the color of marker is GREEN and
+//                 * for the end location, the color of marker is RED.
+//                 */
+//                if (MarkerPoints.size() == 1) {
+//
+//
+//                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+////                    Intent in = new Intent(MapsActivity.this,Information.class);
+////                    startActivity(in);
+//                } else if (MarkerPoints.size() == 2) {
+//                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+////                    Intent in = new Intent(MapsActivity.this, Information.class);
+////                    startActivity(in);
+//                }
+//
+//
+//
+//                // Add new marker to the Google Map Android API V2
+//                mMap.addMarker(options);
+//
+//                // Checks, whether start and end locations are captured
+//                if (MarkerPoints.size() >= 2) {
+//                    LatLng origin = MarkerPoints.get(0);
+//                    LatLng dest = MarkerPoints.get(1);
+//
+//                    // Getting URL to the Google Directions API
+//                    String url = getUrl(origin, dest);
+//                    Log.d("onMapClick", url.toString());
+//                    FetchUrl FetchUrl = new FetchUrl();
+//
+//                    // Start downloading json data from Google Directions API
+//                    FetchUrl.execute(url);
+////                    //move map camera
+////                    mMap.moveCamera(CameraUpdateFactory.newLatLng(origin));
+////                    mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+//
+////                    Intent in = new Intent(MapsActivity.this,Information.class);
+////                    startActivity(in);
+//                }
+//
+//            }
+//        });
+//
+//    }
 
     private String getUrl(LatLng origin, LatLng dest) {
 
@@ -346,9 +452,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // Drawing polyline in the Google Map for the i-th route
             if(lineOptions != null) {
                 mMap.addPolyline(lineOptions);
-
-                Intent in = new Intent(MapsActivity.this,Information.class);
-                startActivity(in);
+//                Intent in = new Intent(MapsActivity.this,Information.class);
+//                startActivity(in);
 
             }
             else {
@@ -404,8 +509,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         //move map camera
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+//        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 
 
 
@@ -485,5 +590,68 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // other 'case' lines to check for other permissions this app might request.
             // You can add here other case statements according to your requirement.
         }
+    }
+
+// Code for KMl file
+
+    private void retrieveFileFromUrl() {
+        new DownloadKmlFile(getString(R.string.kml_url)).execute();
+    }
+
+    private class DownloadKmlFile extends AsyncTask<String, Void, byte[]> {
+        private final String mUrl;
+
+        public DownloadKmlFile(String url) {
+            mUrl = url;
+        }
+
+        protected byte[] doInBackground(String... params) {
+            try {
+                InputStream is = getResources().openRawResource(R.raw.campus);
+
+                //InputStream is =  new URL(mUrl).openStream();
+                ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                int nRead;
+                byte[] data = new byte[16384];
+                while ((nRead = is.read(data, 0, data.length)) != -1) {
+                    buffer.write(data, 0, nRead);
+                }
+                buffer.flush();
+                return buffer.toByteArray();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        protected void onPostExecute(byte[] byteArr) {//new ByteArrayInputStream(byteArr)
+            try {
+                KmlLayer kmlLayer = new KmlLayer(mMap, new ByteArrayInputStream(byteArr),
+                        getApplicationContext());
+                kmlLayer.addLayerToMap();
+                moveCameraToKml(kmlLayer);
+            } catch (XmlPullParserException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void moveCameraToKml(KmlLayer kmlLayer) {
+        //Retrieve the first container in the KML layer
+        KmlContainer container = kmlLayer.getContainers().iterator().next();
+        //Retrieve a nested container within the first container
+        container = container.getContainers().iterator().next();
+        //Retrieve the first placemark in the nested container
+        KmlPlacemark placemark = container.getPlacemarks().iterator().next();
+        //Retrieve a polygon object in a placemark
+        KmlPolygon polygon = (KmlPolygon) placemark.getGeometry();
+        //Create LatLngBounds of the outer coordinates of the polygon
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        for (LatLng latLng : polygon.getOuterBoundaryCoordinates()) {
+            builder.include(latLng);
+        }
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(builder.build(), 1));
     }
 }

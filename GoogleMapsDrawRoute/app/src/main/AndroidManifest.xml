@@ -65,10 +65,19 @@
         </activity>
 
         <activity
+            android:name=".LineInfo"
+            android:label="@string/title_activity_maps">
+            <intent-filter>
+                <action android:name="android.intent.action.LineInfo"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".LineInfoShow"
             android:label="@string/title_activity_maps">
             <intent-filter>
-                <action android:name="android.intent.action.Show"/>
+                <action android:name="android.intent.action.LineInfoShow"/>
 
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
@@ -79,7 +88,17 @@
             android:name=".SecondInformation"
             android:label="@string/title_activity_maps">
             <intent-filter>
-                <action android:name="android.intent.action.Show"/>
+                <action android:name="android.intent.action.SecondInformation"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".SecondInformationShow"
+            android:label="@string/title_activity_maps">
+            <intent-filter>
+                <action android:name="android.intent.action.SecondInformationShow"/>
 
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
