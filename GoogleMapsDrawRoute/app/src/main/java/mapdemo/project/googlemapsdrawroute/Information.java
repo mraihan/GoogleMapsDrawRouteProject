@@ -39,6 +39,7 @@ public class Information extends Activity {
                 in.putExtra("name", editTextName.getText().toString());
                 in.putExtra("addr", editTextAddress.getText().toString());
                 in.putExtra("mob", editTextMobile.getText().toString());
+
                 Toast.makeText(getApplicationContext(), "Saved !!", Toast.LENGTH_LONG).show();
                 startActivity(in);
 

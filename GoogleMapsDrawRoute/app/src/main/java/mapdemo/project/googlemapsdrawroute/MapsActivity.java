@@ -83,7 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View v) {
 
-                Intent in = new Intent(MapsActivity.this,LineInfo.class);
+                Intent in = new Intent(MapsActivity.this,LineInfoShow.class);
                 startActivity(in);
 
 
@@ -120,6 +120,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+        retrieveFileFromUrl();
+        googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 
         //Initialize Google Play Services
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -192,8 +195,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //                    mMap.moveCamera(CameraUpdateFactory.newLatLng(origin));
 //                    mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 
-                    Intent in = new Intent(MapsActivity.this,SecondInformation.class);
-                    startActivity(in);
+
                 }
 
             }
